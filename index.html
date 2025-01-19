@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Saga de Películas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Tres columnas */
+    gap: 10px; /* Espacio entre las películas */
+}
+
+.movie {
+    text-align: center;
+}
+
+.movie img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.movie:hover img {
+    transform: scale(1.05);
+}
+
+.movie h3 {
+    font-size: 14px;
+    margin: 8px 0;
+    color: #ffcc00;
+}
+
+/* Estilos del modal de la saga */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content-saga {
+    background-color: #000000; /* Fondo de la saga en color amarillo */
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    color: #000000;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content-saga img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    border-radius: 8px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+.modal-content-saga h3 {
+    color: #000000;
+}
+
+.modal-content-saga p {
+    margin: 10px 0;
+    color: #333333;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.modal-content-saga p i {
+    margin-right: 8px;
+    color: #000000;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    color: #ffffff; /* Cambié el color del "X" a blanco */
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ffcc00;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #ff0000;
+}
+
+/* Estilos del modal individual de la película */
+.modal-content-movie {
+    background-color: #1c1c1c; /* Fondo de la película en color oscuro */
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    color: #ffffff;
+    text-align: center;
+    position: relative; /* Añadido para que el "X" quede dentro del modal */
+}
+
+.modal-content-movie img {
+    width: 40%;
+    height: auto;
+    max-width: 200px;
+    border-radius: 8px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+.modal-content-movie h3 {
+    color: #ffffff;
+}
+
+.modal-content-movie p {
+    margin: 10px 0;
+    color: #b0b0b0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.modal-content-movie p i {
+    margin-right: 8px;
+    color: #ffffff;
+}
+    </style>
+</head>
+<body>
+
+<h1 style="text-align: center; color: #ffffff;">SAGAS ASIÁTICAS</h1>
+
+<div class="grid">
+<!-- SAGA - THE WITCH -->
+<div class="movie" onclick="openModal('modalTheWitchSaga')">
+    <img src="https://image.tmdb.org/t/p/original/xMAbXfcIuciIJ2BjrCrkwx96goh.jpg" alt="SAGA - THE WITCH">
+    <h3></h3>
+</div>
+<!-- SAGA - ESTACIÓN ZOMBIE -->
+<div class="movie" onclick="openModal('modalTrainToBusanSaga')">
+    <img src="https://image.tmdb.org/t/p/original/tHf6vEy8YlXlICu9HBaHK0kEJ89.jpg" alt="SAGA - ESTACIÓN ZOMBIE">
+    <h3></h3>
+</div>
+<!-- SAGA - CONCRETE UTOPIA -->
+<div class="movie" onclick="openModal('modalConcreteUtopiaSaga')">
+    <img src="https://image.tmdb.org/t/p/original/l4emA6jN9YQxhdpoZ4IThpMofc6.jpg" alt="SAGA - CONCRETE UTOPIA">
+    <h3></h3>
+</div>
+</div>
+
+<!-- AQUI VAN TODOS LOS MODALES DE CADA SAGA -->
+
+<!-- Modal de la SAGA The Witch -->
+<div id="modalTheWitchSaga" class="modal">
+    <div class="modal-content-saga">
+        <span class="close" onclick="closeModal('modalTheWitchSaga')">&times;</span>
+        <div class="grid">
+            <div class="movie" onclick="openMovieModal('movieTheWitch2018')">
+                <img src="https://image.tmdb.org/t/p/original/4i2wo2ja5g2PmUxWa1a2eYIboZf.jpg" alt="La Bruja: Parte 1. The Subversion">
+                <h3></h3>
+            </div>
+            <div class="movie" onclick="openMovieModal('movieTheWitch22022')">
+                <img src="https://image.tmdb.org/t/p/original/9YTuscJXmr9Iua62amCgGSU8PDW.jpg" alt="La Bruja: Parte 2. LA Caceria">
+                <h3></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de la SAGA Train to Busan -->
+<div id="modalTrainToBusanSaga" class="modal">
+    <div class="modal-content-saga">
+        <span class="close" onclick="closeModal('modalTrainToBusanSaga')">&times;</span>
+        <div class="grid">
+            <div class="movie" onclick="openMovieModal('movieTrainToBusan2016')">
+                <img src="https://image.tmdb.org/t/p/original/3H1WFCuxyNRP35oiL2qqwhAXxc0.jpg" alt="Train to Busan">
+                <h3></h3>
+            </div>
+            <div class="movie" onclick="openMovieModal('moviePeninsula2020')">
+                <img src="https://image.tmdb.org/t/p/original/eeqvAzCccAZOhU3RfbvHB3s44S6.jpg" alt="Peninsula">
+                <h3></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de la SAGA Concrete Utopia -->
+<div id="modalConcreteUtopiaSaga" class="modal">
+    <div class="modal-content-saga">
+        <span class="close" onclick="closeModal('modalConcreteUtopiaSaga')">&times;</span>
+        <div class="grid">
+            <!-- Concrete Utopia -->
+            <div class="movie" onclick="openMovieModal('movieConcreteUtopia2023')">
+                <img src="https://image.tmdb.org/t/p/original/4l68KHxnPSow8MvnGUpjqLzJtLJ.jpg" alt="Concrete Utopia">
+                <h3></h3>
+            </div>
+            <!-- Cazadores en la Tierra inhóspita -->
+            <div class="movie" onclick="openMovieModal('movieCazadoresTierraInhospita2023')">
+                <img src="https://image.tmdb.org/t/p/original/zVMyvNowgbsBAL6O6esWfRpAcOb.jpg" alt="Cazadores en la Tierra inhóspita">
+                <h3></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AQUI VAN LOS MODALES DE LAS SAGAS -->
+
+<!-- AQUI ESTA LA SAGA DE "THE WITCH" -->
+
+<!-- LA BRUJA: PARTE 1. THE SUBVERSION -->    
+
+<!-- Modal de La Bruja: Parte 1. The Subversion -->
+<div id="movieTheWitch2018" class="modal">
+    <div class="modal-content-movie">
+        <span class="close" onclick="closeModal('movieTheWitch2018')">&times;</span>
+        <img src="https://image.tmdb.org/t/p/original/4i2wo2ja5g2PmUxWa1a2eYIboZf.jpg" alt="La Bruja: Parte 1. The Subversion">
+        <h3>LA BRUJA: PARTE 1. THE SUBVERSION</h3>
+        <p><i class="fas fa-calendar"></i> <strong>Año:</strong> 2018</p>
+        <p><i class="fas fa-film"></i> <strong>Género:</strong> Acción, Misterio, Ciencia ficción</p>
+        <p><i class="fas fa-clock"></i> <strong>Duración:</strong> 2h 5 mins</p>
+        <p><i class="fas fa-book"></i> <strong>Sinopsis:</strong> Una chica de 19 años sin memoria de su infancia guarda un misterioso pasado dentro de su vida aparentemente normal. Un grupo de extraños se presentan convirtiendo su existencia en un sangriento caos.</p>
+        <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2sycG1sZG80a2VwYQ==" class="button" target="_blank">VER PELÍCULA</a>
+    </div>
+</div>
+
+<!-- Modal de La Bruja: Parte 2. La Caceria -->
+<div id="movieTheWitch22022" class="modal">
+    <div class="modal-content-movie">
+        <span class="close" onclick="closeModal('movieTheWitch22022')">&times;</span>
+        <img src="https://image.tmdb.org/t/p/original/9YTuscJXmr9Iua62amCgGSU8PDW.jpg" alt="La Bruja: Parte 2. La Caceria">
+        <h3>LA BRUJA: PARTE 2. LA CACERIA</h3>
+        <p><i class="fas fa-calendar"></i> <strong>Año:</strong> 2022</p>
+        <p><i class="fas fa-film"></i> <strong>Género:</strong> Acción, Misterio, Suspenso, Ciencia Ficción</p>
+        <p><i class="fas fa-clock"></i> <strong>Duración:</strong> 2h 17 mins</p>
+        <p><i class="fas fa-book"></i> <strong>Sinopsis:</strong> Una chica se despierta en un laboratorio secreto y conoce a Kyung-hee, que intenta protegerla de una banda. Cuando la banda finalmente encuentra a la chica, se ven abrumados por un poder inesperado.</p>
+        <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2plZ3htOWlsbDI4ZQ==" class="button" target="_blank">VER PELÍCULA</a>
+    </div>
+</div>
+
+<!-- AQUI ESTA LA SAGA DE "ESTACIÓN ZOMBIE" -->
+
+<!-- TRAIN TO BUSAN -->
+
+<!-- Modal de Train to Busan -->
+<div id="movieTrainToBusan2016" class="modal">
+    <div class="modal-content-movie">
+        <span class="close" onclick="closeModal('movieTrainToBusan2016')">&times;</span>
+        <img src="https://image.tmdb.org/t/p/original/3H1WFCuxyNRP35oiL2qqwhAXxc0.jpg" alt="Train to Busan">
+        <h3>ESTACIÓN ZOMBIE: TREN A BUSAN</h3>
+        <p><i class="fas fa-calendar"></i> <strong>Año:</strong> 2016</p>
+        <p><i class="fas fa-film"></i> <strong>Género:</strong> Terror, Suspenso, Acción</p>
+        <p><i class="fas fa-clock"></i> <strong>Duración:</strong> 1h 57 mins</p>
+        <p><i class="fas fa-book"></i> <strong>Sinopsis:</strong> Un brote viral misterioso pone a Corea en estado de emergencia. Sok-woo y su hija Soo-ahn suben al KTX, un tren rápido que une los 442 km que separan Seúl de Busan, una ciudad que se defiende con éxito de la epidemia. Sin embargo, justo en el momento de su partida, la estación es invadida por zombis que matan al conductor del tren y a otros pasajeros</p>
+        <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2RkY3l6MmcxY2UxcQ==" class="button" target="_blank">VER PELÍCULA</a>
+    </div>
+</div>
+
+<!-- PENÍNSULA -->
+
+<!-- Modal de Península -->
+<div id="moviePeninsula2020" class="modal">
+    <div class="modal-content-movie">
+        <span class="close" onclick="closeModal('moviePeninsula2020')">&times;</span>
+        <img src="https://image.tmdb.org/t/p/original/eeqvAzCccAZOhU3RfbvHB3s44S6.jpg" alt="Peninsula">
+        <h3>PENINSULA</h3>
+        <p><i class="fas fa-calendar"></i> <strong>Año:</strong> 2020</p>
+        <p><i class="fas fa-film"></i> <strong>Género:</strong> Terror, Acción, Suspenso</p>
+        <p><i class="fas fa-clock"></i> <strong>Duración:</strong> 1h 55 mins</p>
+        <p><i class="fas fa-book"></i> <strong>Sinopsis:</strong> Después de que la infección que se extendió hace 4 años, solo algunas partes de Corea del Sur permanecen resguardadas, aunque la Península de Busan es la única parte en donde pueden buscar refugio los coreanos, muchos aún mantienen la esperanza de ser rescatados por ayuda internacional.</p>
+        <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2w0YWRsYmUzOWpsNw==" class="button" target="_blank">VER PELÍCULA</a>
+    </div>
+</div>
+
+<!-- AQUI ESTA LA SAGA DE "CONCRETE UTOPIA" -->
+
+<!-- CONCRETE UTOPIA -->
+
+<!-- Modal de Concrete Utopia -->
+<div id="movieConcreteUtopia2023" class="modal">
+    <div class="modal-content-movie">
+        <span class="close" onclick="closeModal('movieConcreteUtopia2023')">&times;</span>
+        <img src="https://image.tmdb.org/t/p/original/4l68KHxnPSow8MvnGUpjqLzJtLJ.jpg" alt="Concrete Utopia">
+        <h3>CONCRETE UTOPIA</h3>
+        <p><i class="fas fa-calendar"></i> <strong>Año:</strong> 2023</p>
+        <p><i class="fas fa-film"></i> <strong>Género:</strong> Suspenso, Ciencia ficción, Drama</p>
+        <p><i class="fas fa-clock"></i> <strong>Duración:</strong> 2h 10 mins</p>
+        <p><i class="fas fa-book"></i> <strong>Sinopsis:</strong> El mundo ha sido reducido a escombros por un terremoto masivo. Si bien nadie sabe con certeza cuánto se extienden las ruinas, o cuál puede ser la causa del terremoto, en el corazón de Seúl solo queda un edificio de apartamentos en pie. Se llama Apartamentos Hwang Gung.</p>
+        <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2RudDU1dHpsaXozdA==" class="button" target="_blank">VER PELÍCULA</a>
+    </div>
+</div>
+
+<!-- CAZADORES DE TIERRA INHÓSPITA -->
+
+<!-- Modal de Cazadores en la Tierra inhóspita -->
+<div id="movieCazadoresTierraInhospita2023" class="modal">
+    <div class="modal-content-movie">
+        <span class="close" onclick="closeModal('movieCazadoresTierraInhospita2023')">&times;</span>
+        <img src="https://image.tmdb.org/t/p/original/zVMyvNowgbsBAL6O6esWfRpAcOb.jpg" alt="Cazadores en Tierra inhóspita">
+        <h3>CAZADORES EN TIERRA INHÓSPITA</h3>
+        <p><i class="fas fa-calendar"></i> <strong>Año:</strong> 2024</p>
+        <p><i class="fas fa-film"></i> <strong>Género:</strong> Ciencia Ficción, Acción</p>
+        <p><i class="fas fa-clock"></i> <strong>Duración:</strong> 1h 48 mins</p>
+        <p><i class="fas fa-book"></i> <strong>Sinopsis:</strong> Cuando Seúl se vuelve un lugar yermo y sin ley tras un terremoto, un cazador entra en acción para rescatar a una adolescente que fue secuestrada por un médico trastornado.</p>
+        <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lLzdmY254M2MwMnZyaA==" class="button" target="_blank">VER PELÍCULA</a>
+    </div>
+</div>
+
+
+
+<script>
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+
+    function openMovieModal(movieId) {
+        document.getElementById(movieId).style.display = "block";
+    }
+</script>
+
+</body>
+</html>
