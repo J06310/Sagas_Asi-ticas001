@@ -160,6 +160,29 @@
     margin-right: 8px;
     color: #ffffff;
 }
+.movie {
+    position: relative;
+}
+
+.movie-poster {
+    position: relative;
+}
+
+.movie-poster img {
+    display: block;
+    width: 100%;
+}
+
+.label {
+    position: absolute;
+    top: 4px;
+    left: 60px;
+    background-color: red;
+    color: white;
+    padding: 3px 5px;
+    font-size: 12px;
+    border-radius: 3px;
+}
     </style>
 </head>
 <body>
@@ -169,17 +192,17 @@
 <div class="grid">
 <!-- SAGA - THE WITCH -->
 <div class="movie" onclick="openModal('modalTheWitchSaga')">
-    <img src="https://image.tmdb.org/t/p/original/xMAbXfcIuciIJ2BjrCrkwx96goh.jpg" alt="SAGA - THE WITCH">
+    <img src="https://image.tmdb.org/t/p/original/xMAbXfcIuciIJ2BjrCrkwx96goh.jpg" alt="SAGA - THE WITCH"><div class="label">#1</div>
     <h3></h3>
 </div>
 <!-- SAGA - ESTACIÓN ZOMBIE -->
 <div class="movie" onclick="openModal('modalTrainToBusanSaga')">
-    <img src="https://image.tmdb.org/t/p/original/tHf6vEy8YlXlICu9HBaHK0kEJ89.jpg" alt="SAGA - ESTACIÓN ZOMBIE">
+    <img src="https://image.tmdb.org/t/p/original/tHf6vEy8YlXlICu9HBaHK0kEJ89.jpg" alt="SAGA - ESTACIÓN ZOMBIE"><div class="label">#2</div>
     <h3></h3>
 </div>
 <!-- SAGA - CONCRETE UTOPIA -->
 <div class="movie" onclick="openModal('modalConcreteUtopiaSaga')">
-    <img src="https://image.tmdb.org/t/p/original/l4emA6jN9YQxhdpoZ4IThpMofc6.jpg" alt="SAGA - CONCRETE UTOPIA">
+    <img src="https://image.tmdb.org/t/p/original/l4emA6jN9YQxhdpoZ4IThpMofc6.jpg" alt="SAGA - CONCRETE UTOPIA"><div class="label">#3</div>
     <h3></h3>
 </div>
 </div>
